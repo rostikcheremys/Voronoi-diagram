@@ -62,9 +62,9 @@
             this.Controls.Add(this.btnRandomPoints);
             this.Controls.Add(this.MultiThread);
             this.Name = "Form1";
-            this.Text = "Form1";
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainForm_Paint);
-            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseClick);
+            this.Text = "Voronoi Diagram";
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form_Paint);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form_MouseClick);
             this.ResumeLayout(false);
             this.PerformLayout();
         }

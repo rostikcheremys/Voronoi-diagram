@@ -9,7 +9,6 @@ namespace Program
 {
     public sealed partial class Form1 : Form
     {
-        
         private readonly List<Point> _points = new ();
         private readonly Dictionary<Point, Color> _color = new ();
         private readonly Random _random = new ();

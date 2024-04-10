@@ -30,47 +30,61 @@
         private void InitializeComponent()
         {
             this.MultiThread = new System.Windows.Forms.CheckBox();
-            this.btnRandomPoints = new System.Windows.Forms.Button();
+            this.btnRandom = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // MultiThread
             // 
             this.MultiThread.AutoSize = true;
-            this.MultiThread.Location = new System.Drawing.Point(12, 16);
+            this.MultiThread.Location = new System.Drawing.Point(460, 14);
             this.MultiThread.Name = "MultiThread";
-            this.MultiThread.Size = new System.Drawing.Size(85, 17);
+            this.MultiThread.Size = new System.Drawing.Size(82, 17);
             this.MultiThread.TabIndex = 0;
-            this.MultiThread.Text = "Multi-Thread";
+            this.MultiThread.Text = "MultiThread";
             this.MultiThread.UseVisualStyleBackColor = true;
-            this.MultiThread.CheckedChanged += new System.EventHandler(this.SingleThread_CheckedChanged);
+            this.MultiThread.CheckedChanged += new System.EventHandler(this.MultiThread_CheckedChanged);
             // 
-            // btnRandomPoints
+            // btnRandom
             // 
-            this.btnRandomPoints.Location = new System.Drawing.Point(557, 12);
-            this.btnRandomPoints.Name = "btnRandomPoints";
-            this.btnRandomPoints.Size = new System.Drawing.Size(115, 23);
-            this.btnRandomPoints.TabIndex = 1;
-            this.btnRandomPoints.Text = "Random Points";
-            this.btnRandomPoints.UseVisualStyleBackColor = true;
-            this.btnRandomPoints.Click += new System.EventHandler(this.btnRandomPoints_Click);
+            this.btnRandom.Location = new System.Drawing.Point(548, 10);
+            this.btnRandom.Name = "btnRandom";
+            this.btnRandom.Size = new System.Drawing.Size(59, 23);
+            this.btnRandom.TabIndex = 1;
+            this.btnRandom.Text = "Random";
+            this.btnRandom.UseVisualStyleBackColor = true;
+            this.btnRandom.Click += new System.EventHandler(this.btnRandomPoints_Click);
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(613, 10);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(59, 23);
+            this.btnClear.TabIndex = 2;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.Clear);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(684, 461);
-            this.Controls.Add(this.btnRandomPoints);
+            this.Controls.Add(this.btnClear);
+            this.Controls.Add(this.btnRandom);
             this.Controls.Add(this.MultiThread);
+            this.Location = new System.Drawing.Point(15, 15);
             this.Name = "Form1";
-            this.Text = "Voronoi Diagram";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form_Paint);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form_MouseClick);
             this.ResumeLayout(false);
             this.PerformLayout();
         }
 
+        private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.CheckBox MultiThread;
-        private System.Windows.Forms.Button btnRandomPoints;
+        private System.Windows.Forms.Button btnRandom;
 
         #endregion
     }

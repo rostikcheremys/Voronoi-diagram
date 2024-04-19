@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Program
 {
@@ -28,16 +27,14 @@ namespace Program
         {
             foreach (Point point in _points)
             {
-                graphics.FillEllipse(Brushes.Black, point.X - 3, point.Y - 3, 8, 8);
+                graphics.FillEllipse(Brushes.Black, point.X - 3, point.Y - 3, 5, 5);
             }
         }
         
         private void Form_Paint(object sender, PaintEventArgs e)
         {
             Graphics graphics = e.Graphics;
-
-            DrawVertices(graphics);
-
+            
             if (_points.Count >= 2)
             {
                 if (_singleThreadMode)
@@ -85,8 +82,8 @@ namespace Program
         {
             Clear(sender, e);
             
-            int numberPoints = _random.Next(5, 20);
-            
+            //int numberPoints = _random.Next(5, 20);
+            int numberPoints = 500;
             for (int i = 0; i < numberPoints; i++)
             {
                 _points.Add(new Point(_random.Next(ClientSize.Width), _random.Next(ClientSize.Height)));
@@ -111,19 +108,21 @@ namespace Program
 
         private void DrawMultiThread(Graphics graphics)
         {
-            const int numberThreads = 4;
+            int segmentWidth = ClientSize.Width / Environment.ProcessorCount;
+            int segmentHeight = ClientSize.Height;
             
             List<Task> tasks = new List<Task>();
 
-            for (int t = 0; t < numberThreads; t++)
+            for (int t = 0; t < Environment.ProcessorCount; t++)
             {
-                int threadId = t;
-
+                int startX = t * segmentWidth;
+                int endX = (t + 1) * segmentWidth;
+                
                 Task task = Task.Run(() =>
                 {
-                    for (int x = threadId; x < ClientSize.Width; x += numberThreads)
+                    for (int x = startX; x < endX; x += Environment.ProcessorCount)
                     {
-                        for (int y = 0; y < ClientSize.Height; y++)
+                        for (int y = 0; y < segmentHeight; y++)
                         {
                             Point closestPoint = FindClosestPoint(x, y);
                             
@@ -170,15 +169,7 @@ namespace Program
 
         private Color GenerateRandomColor()
         {
-            while (true)
-            {
-                Color color = Color.FromArgb(_random.Next(256), _random.Next(256), _random.Next(256));
-
-                if (!_color.Values.Contains(color))
-                {
-                    return color;
-                }
-            }
+            return Color.FromArgb(_random.Next(256), _random.Next(256), _random.Next(256));
         }
         
         private void Clear(object sender, EventArgs e)
@@ -191,7 +182,6 @@ namespace Program
         private void MultiThread_CheckedChanged(object sender, EventArgs e)
         {
             _singleThreadMode = MultiThread.Checked;
-            Invalidate();
         }
     }
 }

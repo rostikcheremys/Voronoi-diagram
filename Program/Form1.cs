@@ -9,7 +9,7 @@ namespace Program
     public sealed partial class Form1 : Form
     {
         private readonly List<Point> _points = new ();
-        private readonly Dictionary<Point, Color> _color = new ();
+        private readonly List<Color> _colors = new (); 
         private readonly Random _random = new ();
         private bool _singleThreadMode = true;
         
@@ -17,7 +17,7 @@ namespace Program
         {
             InitializeComponent();
 
-            DoubleBuffered = true;
+            DoubleBuffered = false;
 
             MaximumSize = new Size(Width, Height);
             MinimumSize = new Size(Width, Height);
@@ -39,7 +39,7 @@ namespace Program
             {
                 if (_singleThreadMode)
                 {
-                    DrawSingleThread(graphics);
+                    DrawMultiThread(graphics);
                 }
                 else
                 {
@@ -63,6 +63,7 @@ namespace Program
                     if (Distance(clickedPoint.X, clickedPoint.Y, _points[i]) <= 5)
                     {
                         _points.RemoveAt(i);
+                        _colors.RemoveAt(i);
                         pointRemoved = true;
                         break;
                     }
@@ -71,7 +72,7 @@ namespace Program
                 if (!pointRemoved)
                 {
                     _points.Add(clickedPoint);
-                    _color[clickedPoint] = GenerateRandomColor();
+                    _colors.Add(Color.FromArgb(_random.Next(256), _random.Next(256), _random.Next(256)));
                 }
 
                 Invalidate();
@@ -87,7 +88,7 @@ namespace Program
             for (int i = 0; i < numberPoints; i++)
             {
                 _points.Add(new Point(_random.Next(ClientSize.Width), _random.Next(ClientSize.Height)));
-                _color[_points[i]] = GenerateRandomColor();
+                _colors.Add(Color.FromArgb(_random.Next(256), _random.Next(256), _random.Next(256)));
             }
 
             Invalidate();
@@ -100,8 +101,9 @@ namespace Program
                 for (int y = 0; y < ClientSize.Height; y++)
                 {
                     Point closestPoint = FindClosestPoint(x, y);
+                    int index = _points.IndexOf(closestPoint);
                     
-                    graphics.FillRectangle(new SolidBrush(_color[closestPoint]), x, y, 1, 1);
+                    graphics.FillRectangle(new SolidBrush(_colors[index]), x, y, 1, 1);
                 }
             }
         }
@@ -120,15 +122,16 @@ namespace Program
                 
                 Task task = Task.Run(() =>
                 {
-                    for (int x = startX; x < endX; x += Environment.ProcessorCount)
+                    for (int x = startX; x < endX; x++)
                     {
                         for (int y = 0; y < segmentHeight; y++)
                         {
                             Point closestPoint = FindClosestPoint(x, y);
+                            int index = _points.IndexOf(closestPoint);
                             
-                            lock (graphics)
+                            lock (graphics) 
                             {
-                                graphics.FillRectangle(new SolidBrush(_color[closestPoint]), x, y, 1, 1);
+                                graphics.FillRectangle(new SolidBrush(_colors[index]), x, y, 1, 1);
                             }
                         }
                     }
@@ -161,21 +164,12 @@ namespace Program
 
         private double Distance(int x1, int y1, Point point)
         {
-            int dx = x1 - point.X;
-            int dy = y1 - point.Y;
-
-            return Math.Sqrt(dx * dx + dy * dy);
-        }
-
-        private Color GenerateRandomColor()
-        {
-            return Color.FromArgb(_random.Next(256), _random.Next(256), _random.Next(256));
+            return Math.Sqrt(Math.Pow(x1 - point.X, 2) + Math.Pow(y1 - point.Y, 2));
         }
         
         private void Clear(object sender, EventArgs e)
         {
             _points.Clear();
-            _color.Clear();
             Invalidate();
         }
         

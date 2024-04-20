@@ -81,6 +81,7 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+        
 
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.CheckBox MultiThread;

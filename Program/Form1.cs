@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Drawing;
+using System.Diagnostics;
 using System.Windows.Forms;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace Program
 {
@@ -19,13 +19,12 @@ namespace Program
         public Form1()
         {
             InitializeComponent();
-
-            DoubleBuffered = true;
-
+            
+            _stopwatch = new Stopwatch();
+            _bitmap = new Bitmap(ClientSize.Width, ClientSize.Height);
+            
             MaximumSize = new Size(Width, Height);
             MinimumSize = new Size(Width, Height);
-            _bitmap = new Bitmap(ClientSize.Width, ClientSize.Height);
-            _stopwatch = new Stopwatch();
         }
 
          private void DrawVertices(Graphics graphics)
@@ -59,6 +58,7 @@ namespace Program
                     {
                         _points.RemoveAt(i);
                         _colors.RemoveAt(i);
+                        
                         pointRemoved = true;
                         break;
                     }
@@ -83,6 +83,7 @@ namespace Program
                 for (int y = 0; y < _bitmap.Height; y++)
                 {
                     Point closestPoint = FindClosestPoint(x, y);
+                    
                     int index = _points.IndexOf(closestPoint);
                     
                     graphics.FillRectangle(new SolidBrush(_colors[index]), x, y, 1, 1);
@@ -111,6 +112,7 @@ namespace Program
                         for (int y = 0; y < segmentHeight; y++)
                         {
                             Point closestPoint = FindClosestPoint(x, y);
+                            
                             int index = _points.IndexOf(closestPoint);
 
                             lock (graphics)
@@ -158,6 +160,7 @@ namespace Program
         private void Draw(object sender, EventArgs e)
         {
             _stopwatch.Restart();
+            
             if (!_singleThreadMode)
             {
                 DrawSingleThread();
@@ -168,6 +171,7 @@ namespace Program
                 DrawMultiThread();
                
             }
+            
             _stopwatch.Stop();
             timer.Text = $"{_stopwatch.ElapsedMilliseconds} ms";
             

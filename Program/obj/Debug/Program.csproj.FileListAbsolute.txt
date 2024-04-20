@@ -8,3 +8,13 @@ D:\Programming\OOP\Voronoi-diagram\Program\Program\bin\Debug\Program.pdb
 D:\Programming\OOP\Voronoi-diagram\Program\Program\obj\Debug\Program.exe
 D:\Programming\OOP\Voronoi-diagram\Program\Program\obj\Debug\Program.pdb
 D:\Programming\OOP\Voronoi-diagram\Program\Program\obj\Debug\Program.Form1.resources
+D:\Programming\OOP\Voronoi-diagram\Program\bin\Debug\Program.exe.config
+D:\Programming\OOP\Voronoi-diagram\Program\bin\Debug\Program.exe
+D:\Programming\OOP\Voronoi-diagram\Program\bin\Debug\Program.pdb
+D:\Programming\OOP\Voronoi-diagram\Program\obj\Debug\Program.csproj.AssemblyReference.cache
+D:\Programming\OOP\Voronoi-diagram\Program\obj\Debug\Program.Form1.resources
+D:\Programming\OOP\Voronoi-diagram\Program\obj\Debug\Program.Properties.Resources.resources
+D:\Programming\OOP\Voronoi-diagram\Program\obj\Debug\Program.csproj.GenerateResource.cache
+D:\Programming\OOP\Voronoi-diagram\Program\obj\Debug\Program.csproj.CoreCompileInputs.cache
+D:\Programming\OOP\Voronoi-diagram\Program\obj\Debug\Program.exe
+D:\Programming\OOP\Voronoi-diagram\Program\obj\Debug\Program.pdb

@@ -114,12 +114,12 @@
             this.PerformLayout();
         }
 
-        private System.Windows.Forms.Label time;
-        private System.Windows.Forms.Button btnDraw;
-        private System.Windows.Forms.Label timer;
         private System.Windows.Forms.CheckBox MultiThread;
         private System.Windows.Forms.Button btnRandom;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Label timer;
+        private System.Windows.Forms.Button btnDraw;
+        private System.Windows.Forms.Label time;
 
         #endregion
     }

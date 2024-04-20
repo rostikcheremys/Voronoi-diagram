@@ -32,12 +32,15 @@
             this.MultiThread = new System.Windows.Forms.CheckBox();
             this.btnRandom = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
+            this.timer = new System.Windows.Forms.Label();
+            this.btnDraw = new System.Windows.Forms.Button();
+            this.time = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // MultiThread
             // 
             this.MultiThread.AutoSize = true;
-            this.MultiThread.Location = new System.Drawing.Point(460, 14);
+            this.MultiThread.Location = new System.Drawing.Point(395, 13);
             this.MultiThread.Name = "MultiThread";
             this.MultiThread.Size = new System.Drawing.Size(82, 17);
             this.MultiThread.TabIndex = 0;
@@ -53,7 +56,7 @@
             this.btnRandom.TabIndex = 1;
             this.btnRandom.Text = "Random";
             this.btnRandom.UseVisualStyleBackColor = true;
-            this.btnRandom.Click += new System.EventHandler(this.btnRandomPoints_Click);
+            this.btnRandom.Click += new System.EventHandler(this.RandomPoints_Click);
             // 
             // btnClear
             // 
@@ -65,12 +68,41 @@
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.Clear);
             // 
+            // timer
+            // 
+            this.timer.Location = new System.Drawing.Point(332, 13);
+            this.timer.Name = "timer";
+            this.timer.Size = new System.Drawing.Size(57, 17);
+            this.timer.TabIndex = 3;
+            this.timer.Text = "\r\n";
+            // 
+            // btnDraw
+            // 
+            this.btnDraw.Location = new System.Drawing.Point(483, 10);
+            this.btnDraw.Name = "btnDraw";
+            this.btnDraw.Size = new System.Drawing.Size(59, 23);
+            this.btnDraw.TabIndex = 4;
+            this.btnDraw.Text = "Draw";
+            this.btnDraw.UseVisualStyleBackColor = true;
+            this.btnDraw.Click += new System.EventHandler(this.Draw);
+            // 
+            // time
+            // 
+            this.time.Location = new System.Drawing.Point(300, 13);
+            this.time.Name = "time";
+            this.time.Size = new System.Drawing.Size(36, 17);
+            this.time.TabIndex = 5;
+            this.time.Text = "Time:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(684, 461);
+            this.Controls.Add(this.time);
+            this.Controls.Add(this.btnDraw);
+            this.Controls.Add(this.timer);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnRandom);
             this.Controls.Add(this.MultiThread);
@@ -81,11 +113,13 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
-        
 
-        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Label time;
+        private System.Windows.Forms.Button btnDraw;
+        private System.Windows.Forms.Label timer;
         private System.Windows.Forms.CheckBox MultiThread;
         private System.Windows.Forms.Button btnRandom;
+        private System.Windows.Forms.Button btnClear;
 
         #endregion
     }

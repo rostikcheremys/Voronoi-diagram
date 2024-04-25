@@ -95,7 +95,7 @@ namespace Program
         {
             using Graphics graphics = Graphics.FromImage(_bitmap);
             
-            int segmentWidth = _bitmap.Width / Environment.ProcessorCount;
+            int segmentWidth = (int)Math.Ceiling((double)_bitmap.Width / Environment.ProcessorCount);
             int segmentHeight = _bitmap.Height;
 
             List<Task> tasks = new List<Task>();
@@ -103,8 +103,8 @@ namespace Program
             for (int t = 0; t < Environment.ProcessorCount; t++)
             {
                 int startX = t * segmentWidth;
-                int endX = (t + 1) * segmentWidth;
-
+                int endX = Math.Min((t + 1) * segmentWidth, _bitmap.Width);
+                    
                 tasks.Add(Task.Run(() =>
                 {
                     for (int x = startX; x < endX; x++)
@@ -112,7 +112,7 @@ namespace Program
                         for (int y = 0; y < segmentHeight; y++)
                         {
                             Point closestPoint = FindClosestPoint(x, y);
-                            
+                        
                             int index = _points.IndexOf(closestPoint);
 
                             lock (graphics)
@@ -159,6 +159,12 @@ namespace Program
         
         private void Draw(object sender, EventArgs e)
         {
+            if (_points.Count == 0)
+            {
+                MessageBox.Show("There are no vertices on the form!");
+                return;
+            }
+            
             _stopwatch.Restart();
             
             if (!_singleThreadMode)
@@ -167,9 +173,7 @@ namespace Program
             }
             else
             {
-                
                 DrawMultiThread();
-               
             }
             
             _stopwatch.Stop();
